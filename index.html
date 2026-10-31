@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuidar Podologia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="js/close-menu.js">
+</head>
+<body>
+  <!-- NAV -->
+  <nav>
+    <a href="#inicio" class="logo">  
+      <div class="logo-text">
+        <span class="logo-name">Cuidar Podologia</span>
+        <span class="logo-sub">Clínica Especializada</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#tratamentos">Tratamentos</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="https://maapp.com.br/renatapodologabh" target="_blank" class="nav-cta">Agendar Consulta</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburgerBtn" aria-expanded="false" onclick="openMenu()" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- FULLSCREEN MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+    <button class="mobile-menu-close" id="closeMenuBtn" onclick="closeMenu()" aria-label="Fechar menu"></button>
+
+    <a href="#inicio" class="mobile-menu-logo" onclick="closeMenu()">
+      <div class="logo-text">
+        <span class="logo-name">Cuidar Podologia</span>
+        <span class="logo-sub">Clínica Especializada</span>
+      </div>
+    </a>
+
+    <ul class="mobile-nav-links">
+      <li><a href="#inicio" onclick="closeMenu()">Início</a></li>
+      <li><a href="#sobre" onclick="closeMenu()">Sobre</a></li>
+      <li><a href="#tratamentos" onclick="closeMenu()">Tratamentos</a></li>
+      <li><a href="#contato" onclick="closeMenu()">Contato</a></li>
+      <li><a href="https://maapp.com.br/renatapodologabh" target="_blank" class="mobile-cta" onclick="closeMenu()">📅 Agendar Consulta</a></li>
+    </ul>
+
+    <div class="mobile-menu-socials">
+      <a href="https://wa.me/5531986763203" target="_blank" class="social-btn whatsapp" title="WhatsApp">💬</a>
+      <a href="https://www.instagram.com/cuidarpodologia/" target="_blank" class="social-btn instagram" title="Instagram">📸</a>
+      <a href="https://www.facebook.com/renatapodologabh/?locale=pt_BR" target="_blank" class="social-btn facebook" title="Facebook">👤</a>
+    </div>
+  </div>
+
+  <script src="js/close-menu.js"></script>
+
+  <!-- HERO -->
+  <section id="inicio">
+    <div class="hero-content">
+      <div class="hero-badge">Podologia com cuidado e dedicação</div>
+      <h1 class="hero-title">
+        Seus pés merecem<br>
+        <em>atenção especializada</em>
+      </h1>
+      <p class="hero-desc">
+        Na Cuidar Podologia, unimos técnica e acolhimento para oferecer tratamentos modernos que devolvem saúde, conforto e bem-estar para cada passo da sua vida.
+      </p>
+      <div class="hero-actions">
+        <a href="https://maapp.com.br/renatapodologabh" target="_blank" class="btn-primary">📅 Agendar Consulta</a>
+        <a href="#tratamentos" class="btn-secondary">Ver Tratamentos →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">8+</span>
+          <span class="stat-label">Anos de experiência</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1.2k</span>
+          <span class="stat-label">Pacientes atendidos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Satisfação no google</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="card-img-placeholder"><img class="card-img-renata" src="img/card-img-renata.jpeg" alt="Imagem da podologa limpando os pes"></div>
+        <div class="card-tag">Próxima disponibilidade</div>
+        <div class="card-title">Consulta Podológica</div>
+        <div class="card-desc">Avaliação completa dos seus pés com atendimento humanizado e personalizado.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="sobre-inner">
+      <div class="sobre-img-wrap">
+        <div class="sobre-img"><img class="img-renata" src="img/img-renata2.jpeg" alt="Foto da podologa Renata"></div>
+        <div class="sobre-badge">
+          <span class="num">8+</span>
+          <span class="lbl">Anos de experiência</span>
+        </div>
+      </div>
+      <div class="sobre-content">
+        <div class="section-label">Sobre a Profissional</div>
+        <h2 class="sobre-name">Renata</h2>
+        <p class="sobre-cred">Podóloga Especialista • CBO 322205</p>
+        <p class="sobre-text">
+          Apaixonada pela saúde dos pés, dedico minha carreira a proporcionar tratamentos que vão muito além da estética. Acredito que pés saudáveis são a base de uma vida plena e sem limitações.
+        </p>
+        <p class="sobre-text">
+          Com formação técnica avançada e atualização constante, ofereço um atendimento que combina precisão clínica com o calor humano que cada paciente merece. Aqui, você é muito mais do que um número.
+        </p>
+        <div class="sobre-skills">
+          <span class="skill-pill">Podologia Clínica</span>
+          <span class="skill-pill">Onicocriptose</span>
+          <span class="skill-pill">Reflexologia</span>
+          <span class="skill-pill">Podologia Esportiva</span>
+          <span class="skill-pill">Diabetes</span>
+          <span class="skill-pill">Palmilhas</span>
+        </div>
+        <a href="https://wa.me/5531986763203" target="_blank" class="btn-primary">💬 Fale Comigo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRATAMENTOS -->
+  <section id="tratamentos">
+    <div class="trat-inner">
+      <div class="trat-header">
+        <div class="section-label">Nossos Tratamentos</div>
+        <h2 class="section-title">Cuidados completos<br>para a saúde dos seus pés</h2>
+        <p class="section-desc">
+          Oferecemos uma ampla gama de procedimentos podológicos com equipamentos modernos, materiais descartáveis e total segurança.
+        </p>
+      </div>
+      <div class="trat-grid">
+        <div class="trat-card">
+          <div class="trat-icon">✂️</div>
+          <div class="trat-name">Onicocriptose (Unha Encravada)</div>
+          <p class="trat-desc">Tratamento cirúrgico e conservador para unhas encravadas com alívio imediato da dor e prevenção de recorrências.</p>
+
+        </div>
+        <div class="trat-card">
+          <div class="trat-icon">🦠</div>
+          <div class="trat-name">Micose das Unhas (Onicomicose)</div>
+          <p class="trat-desc">Diagnóstico e tratamento especializado para infecções fúngicas nas unhas, recuperando a saúde e aparência natural.</p>
+
+        </div>
+        <div class="trat-card">
+          <div class="trat-icon">🦶</div>
+          <div class="trat-name">Calos e Calosidades</div>
+          <p class="trat-desc">Remoção segura de calos, calosidades e hiperqueratoses com técnicas que garantem conforto e durabilidade.</p>
+
+        </div>
+        <div class="trat-card">
+          <div class="trat-icon">💉</div>
+          <div class="trat-name">Verruga Plantar</div>
+          <p class="trat-desc">Tratamento eficaz para papiloma vírus (HPV) na planta dos pés, com protocolos modernos e alta taxa de sucesso.</p>
+
+        </div>
+        <div class="trat-card">
+          <div class="trat-icon">🩺</div>
+          <div class="trat-name">Podologia para Diabéticos</div>
+          <p class="trat-desc">Cuidados preventivos especiais para pacientes diabéticos, evitando complicações graves e promovendo qualidade de vida.</p>
+
+        </div>
+        <div class="trat-card">
+          <div class="trat-icon">🏃</div>
+          <div class="trat-name">Podologia Esportiva</div>
+          <p class="trat-desc">Avaliação biomecânica, palmilhas personalizadas e tratamento de lesões para atletas e praticantes de atividade física.</p>
+
+        </div>
+        <div class="trat-card">
+          <div class="trat-icon">🌿</div>
+          <div class="trat-name">Reflexologia Podal</div>
+          <p class="trat-desc">Massagem terapêutica nos pontos reflexos dos pés que promove relaxamento, bem-estar e equilíbrio do organismo.</p>
+
+        </div>
+        <div class="trat-card">
+          <div class="trat-icon">🔬</div>
+          <div class="trat-name">Laser Terapia</div>
+          <p class="trat-desc">lasers de baixa intensidade para fotobiomodulação, um procedimento não invasivo e indolor que estimula a regeneração celular, reduz a inflamação e acelera a cicatrização de tecidos.</p>
+
+        </div>
+        <div class="trat-card">
+          <div class="trat-icon">🍄</div>
+          <div class="trat-name">Frieiras</div>
+          <p class="trat-desc">eliminação de fungos através de assepsia, uso de antifúngicos tópicos (cremes/pós), controle da umidade e orientação para higiene</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER / CONTATO -->
+  <footer id="contato">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">
+            
+            <div class="logo-text">
+              <span class="logo-name">Cuidar Podologia</span>
+              <span class="logo-sub">Clínica Especializada</span>
+            </div>
+          </div>
+          <p class="footer-tagline">
+            Cuidado especializado e humanizado para a saúde dos seus pés. Porque cada passo importa.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Localização</h4>
+          <ul>
+            <li><a href="https://www.google.com/maps/place/CUIDAR+PODOLOGIA/@-19.8154367,-43.9644063,17z/data=!3m1!4b1!4m6!3m5!1s0xa69bc6bfa5c597:0xf230d7f8d735bf70!8m2!3d-19.8154367!4d-43.9644063!16s%2Fg%2F11h12tt1yc?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank">📍 Rua Gonçalves, 35<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bairro São João Batista<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Belo Horizonte - MG</a></li>
+            <li><a href="tel:+5531986763203">📞 (31) 98676-3203</a></li>
+            <li style="color:var(--gray-500); font-size:0.85rem; padding-top:0.5rem;">
+              ⏰ Seg–Sex: 9:30h–19h<br>&nbsp;&nbsp;&nbsp;&nbsp;Sáb: 8:30h–16h
+            </li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Redes Sociais</h4>
+          <div class="social-links" style="flex-direction:column; gap:0.8rem;">
+            <a href="https://wa.me/5531986763203" target="_blank" class="social-btn whatsapp" style="width:auto; border-radius:50px; padding:0 1rem; justify-content:flex-start; gap:0.6rem;">
+              <span style="font-size:1.1rem;">💬</span> WhatsApp
+            </a>
+            <a href="https://www.instagram.com/cuidarpodologia/" target="_blank" class="social-btn instagram" style="width:auto; border-radius:50px; padding:0 1rem; justify-content:flex-start; gap:0.6rem;">
+              <span style="font-size:1.1rem;">📸</span> Instagram
+            </a>
+            <a href="https://www.facebook.com/renatapodologabh/?locale=pt_BR" target="_blank" class="social-btn facebook" style="width:auto; border-radius:50px; padding:0 1rem; justify-content:flex-start; gap:0.6rem;">
+              <span style="font-size:1.1rem;">👤</span> Facebook
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Agendamento</h4>
+          <div class="agendamento-box">
+            <p>Agende sua consulta de forma rápida e fácil pelo WhatsApp!</p>
+            <a href="https://maapp.com.br/renatapodologabh" target="_blank">
+              📅 Agendar Agora
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Cuidar Podologia. Todos os direitos reservados.</p>
+        <p>Feito com <span>♥</span> para a saúde dos seus pés</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
