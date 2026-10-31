@@ -7,7 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="js/close-menu.js">
+  <link rel="stylesheet" href="js/avalie.js">
 </head>
+<!-- Biblioteca do Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- JavaScript do Avalie -->
+<script src="./js/avalie.js" defer></script>
 <body>
   <!-- NAV -->
   <nav>
@@ -239,8 +245,50 @@
             <a href="https://www.facebook.com/renatapodologabh/?locale=pt_BR" target="_blank" class="social-btn facebook" style="width:auto; border-radius:50px; padding:0 1rem; justify-content:flex-start; gap:0.6rem;">
               <span style="font-size:1.1rem;">👤</span> Facebook
             </a>
+            <a href="#" id="abrirAvaliacao"
+              class="social-btn estrela"
+              style="width:auto; border-radius:50px; padding:0 1rem; justify-content:flex-start; gap:0.6rem;">
+              <span style="font-size:1.1rem;">⭐</span> Avalie
+            </a>
           </div>
         </div>
+
+          <!-- Avaliação  -->
+
+          <div id="modalAvaliacao" class="modal-avaliacao">
+            <div class="avaliacao">
+              <button id="fecharAvaliacao" class="fechar">×</button>
+
+              <h2>Avalie nosso trabalho</h2>
+              <p>O que você achou do nosso projeto?</p>
+
+              <div class="estrelas">
+                <button class="estrela" data-nota="1">★</button>
+                <button class="estrela" data-nota="2">★</button>
+                <button class="estrela" data-nota="3">★</button>
+                <button class="estrela" data-nota="4">★</button>
+                <button class="estrela" data-nota="5">★</button>
+              </div>
+              <!-- EMAIL -->
+              <div class="campo-email">
+                <label for="emailAvaliacao">Seu e-mail</label>
+                <input
+                  type="email"
+                  id="emailAvaliacao"
+                  placeholder="Digite seu e-mail"
+                  required
+                >
+              </div>
+
+              <textarea
+                id="comentario"
+                placeholder="Escreva seu comentário..."
+              ></textarea>
+
+              <button id="enviarAvaliacao">Enviar avaliação</button>
+            </div>
+          </div>
+
         <div class="footer-col">
           <h4>Agendamento</h4>
           <div class="agendamento-box">
