@@ -1,147 +1,174 @@
-
 document.addEventListener("DOMContentLoaded", () => {
+  inicializarModalAvaliacao();
+  inicializarEstrelas();
+  configurarEnvioAvaliacao();
+});
 
-  // ELEMENTOS
-  const botaoAbrir = document.getElementById("abrirAvaliacao");
+function inicializarModalAvaliacao() {
   const modal = document.getElementById("modalAvaliacao");
+  const botaoAbrir = document.getElementById("abrirAvaliacao");
   const botaoFechar = document.getElementById("fecharAvaliacao");
 
-  const estrelas = document.querySelectorAll(".estrela");
-  const email = document.getElementById("emailAvaliacao");
-  const comentario = document.getElementById("comentario");
-  const botaoEnviar = document.getElementById("enviarAvaliacao");
+  if (!modal) return;
 
-  let nota = 0;
-
-  // ABRIR A JANELA
-  if (botaoAbrir && modal) {
+  if (botaoAbrir) {
     botaoAbrir.addEventListener("click", (event) => {
       event.preventDefault();
       modal.classList.add("aberto");
+      limparFeedback();
     });
-  } else {
-    console.error("Botão ou janela de avaliação não encontrados.");
   }
 
-  // FECHAR A JANELA
-  if (botaoFechar && modal) {
-    botaoFechar.addEventListener("click", () => {
-      modal.classList.remove("aberto");
-    });
-
+  if (botaoFechar) {
+    botaoFechar.addEventListener("click", () => fecharModal(modal));
     modal.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal.classList.remove("aberto");
-      }
+      if (event.target === modal) fecharModal(modal);
     });
   }
+}
 
-  // ESTRELAS
+function fecharModal(modal) {
+  modal.classList.remove("aberto");
+  limparFormularioAvaliacao();
+  limparFeedback();
+}
+
+function inicializarEstrelas() {
+  const estrelas = document.querySelectorAll(".estrela");
+  
   estrelas.forEach((estrela) => {
     estrela.addEventListener("click", () => {
-
-      nota = Number(estrela.dataset.nota);
-
+      const notaSelecionada = Number(estrela.dataset.nota);
+      
       estrelas.forEach((item) => {
-        item.classList.toggle(
-          "selecionada",
-          Number(item.dataset.nota) <= nota
-        );
+        item.classList.toggle("selecionada", Number(item.dataset.nota) <= notaSelecionada);
       });
-
     });
   });
+}
 
-  // INICIALIZAR SUPABASE
-  let banco = null;
+function configurarEnvioAvaliacao() {
+  const botaoEnviar = document.getElementById("enviarAvaliacao");
+  if (!botaoEnviar) return;
 
+  botaoEnviar.addEventListener("click", async () => {
+    limparFeedback();
+    
+    const dados = coletarDadosFormulario();
+    if (!dados) return;
+
+    const banco = conectarSupabase();
+    if (!banco) {
+      mostrarFeedback("Erro ao conectar com o banco de dados.", "erro");
+      return;
+    }
+
+    await enviarDadosParaBanco(banco, dados, botaoEnviar);
+  });
+}
+
+function coletarDadosFormulario() {
+  const email = document.getElementById("emailAvaliacao");
+  const comentario = document.getElementById("comentario");
+  const estrelasSelecionadas = document.querySelectorAll(".estrela.selecionada");
+
+  if (!email.value.trim() || !email.checkValidity()) {
+    mostrarFeedback("Digite um e-mail válido!", "erro");
+    email.focus();
+    return null;
+  }
+
+  if (estrelasSelecionadas.length === 0) {
+    mostrarFeedback("Selecione as estrelas!", "erro");
+    return null;
+  }
+
+  if (!comentario.value.trim()) {
+    mostrarFeedback("Escreva um comentário!", "erro");
+    comentario.focus();
+    return null;
+  }
+
+  return {
+    email: email.value.trim(),
+    nota: estrelasSelecionadas.length,
+    comentario: comentario.value.trim()
+  };
+}
+
+function conectarSupabase() {
   if (window.supabase && window.supabase.createClient) {
-
-    const SUPABASE_URL = "https://mquahhvooknzibrzrfvn.supabase.co";
-    const SUPABASE_KEY = "sb_publishable__nLHj5Nse0fdbAn1mWj3uQ_YuZXCRAy";
-
-    banco = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
+    return window.supabase.createClient(
+      "https://mquahhvooknzibrzrfvn.supabase.co",
+      "sb_publishable__nLHj5Nse0fdbAn1mWj3uQ_YuZXCRAy"
     );
+  }
+  return null;
+}
 
-  } else {
-    console.error("Biblioteca do Supabase não carregada.");
+async function enviarDadosParaBanco(banco, dados, botaoEnviar) {
+  botaoEnviar.disabled = true;
+  botaoEnviar.textContent = "Enviando...";
+
+  try {
+    const { error } = await banco.from("avaliacoes").insert([dados]);
+
+    if (error) {
+      console.error(error);
+      mostrarFeedback("Erro ao salvar a avaliação.", "erro");
+      return;
+    }
+
+    mostrarFeedback("Avaliação enviada com sucesso!", "sucesso");
+    limparFormularioAvaliacao();
+    
+    setTimeout(() => {
+      const modal = document.getElementById("modalAvaliacao");
+      if (modal) modal.classList.remove("aberto");
+      limparFeedback();
+    }, 2000);
+
+  } catch (erro) {
+    console.error(erro);
+    mostrarFeedback("Erro de conexão. Tente novamente.", "erro");
+  } finally {
+    botaoEnviar.disabled = false;
+    botaoEnviar.textContent = "Enviar avaliação";
+  }
+}
+
+function limparFormularioAvaliacao() {
+  const email = document.getElementById("emailAvaliacao");
+  const comentario = document.getElementById("comentario");
+  
+  if (email) email.value = "";
+  if (comentario) comentario.value = "";
+  
+  document.querySelectorAll(".estrela").forEach((item) => {
+    item.classList.remove("selecionada");
+  });
+}
+
+function mostrarFeedback(mensagem, tipo) {
+  const containerAvaliacao = document.querySelector(".avaliacao");
+  if (!containerAvaliacao) return;
+
+  let feedback = document.getElementById("mensagemStatusAvaliacao");
+  if (!feedback) {
+    feedback = document.createElement("p");
+    feedback.id = "mensagemStatusAvaliacao";
+    feedback.setAttribute("role", "status");
+    containerAvaliacao.insertBefore(feedback, document.getElementById("enviarAvaliacao"));
   }
 
-  // ENVIAR AVALIAÇÃO
-  if (botaoEnviar) {
-    botaoEnviar.addEventListener("click", async () => {
+  feedback.textContent = mensagem;
+  feedback.className = `feedback-status ${tipo}`;
+}
 
-      if (!email.value.trim()) {
-        alert("Digite seu e-mail!");
-        email.focus();
-        return;
-      }
-
-      if (!email.checkValidity()) {
-        alert("Digite um e-mail válido!");
-        email.focus();
-        return;
-      }
-
-      if (nota === 0) {
-        alert("Selecione as estrelas!");
-        return;
-      }
-
-      if (!comentario.value.trim()) {
-        alert("Escreva um comentário!");
-        comentario.focus();
-        return;
-      }
-
-      if (!banco) {
-        alert("Não foi possível conectar ao banco de dados.");
-        return;
-      }
-
-      botaoEnviar.disabled = true;
-      botaoEnviar.textContent = "Enviando...";
-
-      try {
-
-        const { error } = await banco
-          .from("avaliacoes")
-          .insert([{
-            email: email.value.trim(),
-            nota: nota,
-            comentario: comentario.value.trim()
-          }]);
-
-        if (error) {
-          console.error(error);
-          alert("Erro ao salvar a avaliação.");
-          return;
-        }
-
-        alert("Avaliação enviada com sucesso!");
-
-        email.value = "";
-        comentario.value = "";
-        nota = 0;
-
-        estrelas.forEach((item) => {
-          item.classList.remove("selecionada");
-        });
-
-        modal.classList.remove("aberto");
-
-      } catch (erro) {
-        console.error(erro);
-        alert("Erro de conexão. Tente novamente.");
-
-      } finally {
-        botaoEnviar.disabled = false;
-        botaoEnviar.textContent = "Enviar avaliação";
-      }
-
-    });
+function limparFeedback() {
+  const feedback = document.getElementById("mensagemStatusAvaliacao");
+  if (feedback) {
+    feedback.textContent = "";
+    feedback.className = "";
   }
-
-});
+}
